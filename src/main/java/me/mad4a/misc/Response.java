@@ -6,17 +6,17 @@ package me.mad4a.misc;
 * all rights reserved
 */
 public class Response {
-	public String status;
-	public String content;
+    public String status;
+    public String content;
 
-	public Response(String raw) {
-		String[] _ = raw.split(" ", 2);
+    public Response(String raw) {
+        String[] _ = raw.split(" ", 2);
 
-		status = _[0];
-		content = _[1];
-	}
+        status = _[0];
+        content = _[1];
+    }
 
-	public boolean isSuccessful() {
-		return status.equals("+OK");
-	}
+    public boolean isSuccessful() {
+        return status.equals("+OK");
+    }
 }

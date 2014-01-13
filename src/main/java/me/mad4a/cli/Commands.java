@@ -6,11 +6,11 @@ package me.mad4a.cli;
  * all rights reserved
  */
 public enum Commands {
-	LOGIN(1), STAT(2), LIST(3), RETR(4), DEL(5), RESET(6), APPLY(7), QUIT(8), RECONN(9);
+    LOGIN(1), STAT(2), LIST(3), RETR(4), DEL(5), RESET(6), APPLY(7), QUIT(8), RECONN(9);
 
-	public int index;
+    public int index;
 
-	Commands(int i) {
-		this.index = i;
-	}
+    Commands(int i) {
+        this.index = i;
+    }
 }

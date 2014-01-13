@@ -6,17 +6,17 @@ package me.mad4a.misc;
 * all rights reserved
 */
 public class MailEntry {
-	public String id;
-	public String size;
+    public String id;
+    public String size;
 
-	public MailEntry(String raw) {
-		String[] _ = raw.split(" ", 2);
+    public MailEntry(String raw) {
+        String[] _ = raw.split(" ", 2);
 
-		id = _[0];
-		size = _[1];
-	}
+        id = _[0];
+        size = _[1];
+    }
 
-	public int getSize() {
-		return Integer.valueOf(size);
-	}
+    public int getSize() {
+        return Integer.valueOf(size);
+    }
 }
