@@ -242,8 +242,6 @@ public class POP3Client {
     protected void finalize() throws Throwable {
         super.finalize();
 
-        _send("QUIT");
-
-        _sock.close();
+        quit();
     }
 }
