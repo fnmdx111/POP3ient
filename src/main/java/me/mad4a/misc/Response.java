@@ -6,8 +6,8 @@ package me.mad4a.misc;
 * all rights reserved
 */
 public class Response {
-    public String status;
-    public String content;
+    private String status;
+    private String content;
 
     public Response(String raw) {
         String[] _ = raw.split(" ", 2);
@@ -15,6 +15,10 @@ public class Response {
         status = _[0];
         content = _[1];
     }
+
+	public String getContent() {
+		return content;
+	}
 
     public boolean isSuccessful() {
         return status.equals("+OK");

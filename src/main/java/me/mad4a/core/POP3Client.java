@@ -24,20 +24,20 @@ import java.util.Scanner;
  * all rights reserved
  */
 public class POP3Client {
-    private CommandLineLogger log;
-    Socket _sock;
-    Scanner in;
-    PrintWriter out;
-    Session session;
-    int timeout;
+    private Logger log;
+    private Socket _sock;
+    private Scanner in;
+    private PrintWriter out;
+    private Session session;
+    private int timeout;
 
-    String cache_username;
-    String cache_password;
-    String cache_serverIP;
-    int cache_serverPort;
+    private String cache_username;
+    private String cache_password;
+    private String cache_serverAddr;
+    private int cache_serverPort;
 
-    public POP3Client(String serverIP, int serverPort, int timeout) throws IOException {
-        cache_serverIP = serverIP;
+    public POP3Client(String serverAddr, int serverPort, int timeout) throws IOException {
+        cache_serverAddr = serverAddr;
         cache_serverPort = serverPort;
 
         this.timeout = timeout;
@@ -45,8 +45,8 @@ public class POP3Client {
         session = Session.getInstance(System.getProperties());
 
         log = new CommandLineLogger("pop3");
-        initializeConnection(serverIP, serverPort, timeout);
 
+        initializeConnection(serverAddr, serverPort, timeout);
         _ret();
     }
 
@@ -54,10 +54,10 @@ public class POP3Client {
         log.setLevel(Logger.getLevel(level));
     }
 
-    private void initializeConnection(String serverIP, int serverPort,
+    private void initializeConnection(String serverAddr, int serverPort,
                                       int timeout) throws IOException {
-        log.d("connecting to %s:%d", serverIP, serverPort);
-        _sock = new Socket(serverIP, serverPort);
+        log.d("connecting to %s:%d", serverAddr, serverPort);
+        _sock = new Socket(serverAddr, serverPort);
         _sock.setSoTimeout(timeout);
         log.d("connected");
 
@@ -66,7 +66,7 @@ public class POP3Client {
     }
 
     public void resetConnection() throws IOException {
-        initializeConnection(cache_serverIP, cache_serverPort, timeout);
+        initializeConnection(cache_serverAddr, cache_serverPort, timeout);
     }
 
     private Response _send(String cmd, boolean readEcho) {
@@ -97,9 +97,9 @@ public class POP3Client {
         }
         Response ret = new Response(response);
         if (ret.isSuccessful()) {
-            log.i("svr: %s", ret.content);
+            log.i("svr: %s", ret.getContent());
         } else {
-            log.e("svr: %s", ret.content);
+            log.e("svr: %s", ret.getContent());
         }
         return ret;
     }
@@ -140,7 +140,7 @@ public class POP3Client {
 
             MailEntry _ = new MailEntry(s);
             ret.add(_);
-            log.i("mail %s, size %s", _.id, _.size);
+            log.i("mail %s, size %d", _.getId(), _.getSize());
         }
 
         return ret;
@@ -149,7 +149,7 @@ public class POP3Client {
     public int status() {
         Response ret = _send("STAT");
 
-        String[] _ = ret.content.split(" ", 2);
+        String[] _ = ret.getContent().split(" ", 2);
         log.i("total %s of size %s", _[0], _[1]);
 
         return Integer.valueOf(_[0]);
@@ -224,7 +224,7 @@ public class POP3Client {
             return false;
         }
 
-        initializeConnection(cache_serverIP, cache_serverPort, timeout);
+        initializeConnection(cache_serverAddr, cache_serverPort, timeout);
         return login(cache_username, cache_password);
     }
 

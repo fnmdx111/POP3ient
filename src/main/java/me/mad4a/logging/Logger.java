@@ -53,11 +53,26 @@ public abstract class Logger {
         this.name = name;
     }
 
-    public abstract void i(String fmt, Object... args);
-    public abstract void d(String fmt, Object... args);
-    public abstract void w(String fmt, Object... args);
-    public abstract void c(String fmt, Object... args);
-    public abstract void e(String fmt, Object... args);
+	public void i(String fmt, Object... args) {
+		log("INFO", String.format(fmt, args));
+	}
+
+	public void d(String fmt, Object... args) {
+		log("DEBUG", String.format(fmt, args));
+	}
+
+	public void w(String fmt, Object... args) {
+		log("WARNING", String.format(fmt, args));
+	}
+
+	public void c(String fmt, Object... args) {
+		log("CRITICAL", String.format(fmt, args));
+	}
+
+	public void e(String fmt, Object... args) {
+		log("ERROR", String.format(fmt, args));
+	}
+
     protected abstract void log(String level, String msg);
 
     protected Map<String, Object> genLogRecord(String level,

@@ -75,6 +75,11 @@ public class Main {
                 throw new ParseException("err: invalid reconnect command", 0);
             }
             return Commands.RECONN;
+        } else if (args[0].equals("help")) {
+	        if (args.length != 1) {
+		        throw new ParseException("err: invalid help command", 0);
+	        }
+	        return Commands.HELP;
         } else {
             throw new ParseException("err: unknown command", 0);
         }
@@ -127,6 +132,9 @@ public class Main {
                     case RECONN:
                         client.resetConnection();
                         break;
+	                case HELP:
+		                out.println(info);
+		                break;
                     case QUIT:
                         client.quit();
                         System.exit(0);

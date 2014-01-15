@@ -6,8 +6,8 @@ package me.mad4a.misc;
 * all rights reserved
 */
 public class MailEntry {
-    public String id;
-    public String size;
+    private String id;
+    private String size;
 
     public MailEntry(String raw) {
         String[] _ = raw.split(" ", 2);
@@ -15,6 +15,10 @@ public class MailEntry {
         id = _[0];
         size = _[1];
     }
+
+	public String getId() {
+		return id;
+	}
 
     public int getSize() {
         return Integer.valueOf(size);

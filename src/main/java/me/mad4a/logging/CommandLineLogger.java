@@ -25,30 +25,4 @@ public class CommandLineLogger extends Logger {
             System.out.println(format.format(record));
         }
     }
-
-    @Override
-    public void i(String fmt, Object... args) {
-        log("INFO", String.format(fmt, args));
-    }
-
-    @Override
-    public void d(String fmt, Object... args) {
-        log("DEBUG", String.format(fmt, args));
-    }
-
-    @Override
-    public void w(String fmt, Object... args) {
-        log("WARNING", String.format(fmt, args));
-    }
-
-    @Override
-    public void c(String fmt, Object... args) {
-        log("CRITICAL", String.format(fmt, args));
-    }
-
-    @Override
-    public void e(String fmt, Object... args) {
-        log("ERROR", String.format(fmt, args));
-    }
-
 }
